@@ -3,7 +3,9 @@ import '../stylesheets/Area.css'
 import HostList from './HostList'
 
 const Area = (props) => {
+  
   const formatAreaName = () => props.name.split('_').join(' ')
+
   return (
     <div className='area' id={props.name}>
       <h3 className='labels'>{formatAreaName()}</h3>

@@ -1,23 +1,25 @@
 import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
-
+import { Log } from '../services/Log'
 
 class HostInfo extends Component {
   handleChange = (e, {value}) => {
     // stop limit here
     let targetArea = this.props.areas.find(area => area.name === value)
     let hostsInArea = this.props.hosts.filter(host => host.area === targetArea.name)
-    if (hostsInArea.length > targetArea.limit) {
-      //error log
+    if (hostsInArea.length >= targetArea.limit) {
+      this.props.updateLogs(Log.error(`Too many hosts. Cannot add ${this.props.selectedHost.firstName} to ${this.formatName(targetArea.name)}`))
     } else {
-      this.props.updateHost('area', value)
+      this.props.updateHost('area', value, this.props.selectedHost)
+      this.updateLogs(Log.notify(`${this.props.selectedHost.firstName} set in area ${this.formatName(value)}`))
     }
   }
 
   toggle = () => {
     //do bs patch here
-    this.props.updateHost('active', !this.props.selectedHost.active)
+    this.props.updateHost('active', !this.props.selectedHost.active, this.props.selectedHost)
+    this.props.updateLogs(this.props.selectedHost.active ? Log.warn(`Activated ${this.props.selectedHost.firstName}`) : Log.notify(`Decommissioned ${this.props.selectedHost.firstName}`))
   }
 
   areaOptions = () => this.props.areas.map(area => this.createOptionsHash(area))

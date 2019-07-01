@@ -3,11 +3,13 @@ import './stylesheets/App.css'
 import { Segment } from 'semantic-ui-react';
 import WestworldMap from './components/WestworldMap'
 import Headquarters from './components/Headquarters'
+import { Log } from './services/Log'
 
 class App extends Component {
   state = {
     areas: [],
     hosts: [],
+    logs: [],
     selectedHost: {id: 0},
     loaded: false
   }
@@ -27,11 +29,10 @@ class App extends Component {
 
   handleSelect = (host) => this.setState({ selectedHost: (this.state.selectedHost.id === host.id) ? {id: 0} : host})
 
-  updateHost = (key, value) => {
+  updateHost = (key, value, host) => {
     let updatedHosts = this.state.hosts
-    let targetHost = this.state.hosts.find(host => host.id === this.state.selectedHost.id)
     
-    fetch(`http://localhost:4000/hosts/${this.state.selectedHost.id}`, {
+    fetch(`http://localhost:4000/hosts/${host.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -43,11 +44,12 @@ class App extends Component {
     .then(data => {
       this.setState({
         ...this.state,
-        selectedHost: { ...this.state.selectedHost, [key]: value}
+        selectedHost: { ...host, [key]: value}
       })
 
       //update array... WHY DO I HAVE TO DO THIS
       //overwrite item in array................there must be a better way pls
+      let targetHost = updatedHosts.find(h => h.id === host.id)
       updatedHosts[updatedHosts.indexOf(targetHost)] = this.state.selectedHost
       this.setState({
         ...this.state,
@@ -56,12 +58,33 @@ class App extends Component {
     })
   }
 
+  updateLogs = (log) => {
+    this.setState({
+      logs: [log, ...this.state.logs]
+    })
+  }
+
   render(){
     if (this.state.loaded) {
       return (
         <Segment id='app'>
-          <WestworldMap areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} handleSelect={this.handleSelect} />
-          <Headquarters areas={this.state.areas} hosts={this.state.hosts} selectedHost={this.state.selectedHost} handleSelect={this.handleSelect} updateHost={this.updateHost}/>
+          <WestworldMap
+            areas={this.state.areas} 
+            hosts={this.state.hosts} 
+            selectedHost={this.state.selectedHost} 
+            handleSelect={this.handleSelect} 
+            logs={this.state.logs} 
+            updateLogs={this.updateLogs}
+          />
+          <Headquarters
+            areas={this.state.areas}
+            hosts={this.state.hosts} 
+            selectedHost={this.state.selectedHost} 
+            handleSelect={this.handleSelect} 
+            updateHost={this.updateHost} 
+            logs={this.state.logs} 
+            updateLogs={this.updateLogs} 
+          />
         </Segment>
       )
     } else {
