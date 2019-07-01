@@ -1,25 +1,38 @@
 import React from 'react';
 import '../stylesheets/Area.css'
+import Host from './Host'
 
-const Area = () => (
+class Area extends React.Component {
+  formatAreaName = () => this.props.name.split('_').join(' ')
 
-  <div className='area' id={/* Pass in the area name here to make sure this is styled correctly */}>
-    <h3 className='labels'>{/* Don't just pass in the name from the data...clean that thing up */}</h3>
+  renderHosts = () => {
+    return this.props.hosts.map(host => {
+      if (host.active && (host.area === this.props.name))
+        return <Host key={host.id} {...host} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} />
+      else
+        return ''
+    })
+  }
 
-    {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
+  render() {
+    return (
+    <div className='area' id={this.props.name}>
+      <h3 className='labels'>{this.formatAreaName()}</h3>
 
-  </div>
+      {this.renderHosts()}
 
-)
-
-Area.propTypes = {
-  hosts: function(props, propName, componentName){
-    if(props.hosts.length > props.limit){
-      throw Error(
-        `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
-      )
-    }
+    </div>)
   }
 }
+
+// Area.propTypes = {
+//   hosts: function(props, propName, componentName){
+//     if(props.hosts.length > props.limit){
+//       throw Error(
+//         `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
+//       )
+//     }
+//   }
+// }
 
 export default Area;
