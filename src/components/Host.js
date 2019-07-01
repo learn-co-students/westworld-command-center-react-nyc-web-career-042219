@@ -2,17 +2,26 @@ import React from 'react';
 import '../stylesheets/Host.css'
 import { Card } from 'semantic-ui-react'
 
-const Host = () => {
+export default class Host extends React.Component {
 
+
+
+ highlight = () =>{
+  return this.props.selectedHost != null ?
+   this.props.id === this.props.selectedHost.id ? "host selected" : "host"
+   :
+  "host"
+}
+
+
+render(){
   return(
     <Card
-      className="host selected"
-      {/* NOTE: The className "host selected" renders a different style than simply "host". */}
-      onClick={ /* On Click what? */}
-      image={/* I wonder what goes here...*/}
+      className={this.highlight()}
+      onClick={()=>this.props.selectHost(this.props)}
+      image={this.props.imageUrl}
       raised
     />
   )
+ }
 }
-
-export default Host

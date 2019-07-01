@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../stylesheets/Headquarters.css';
 import { Grid } from 'semantic-ui-react';
 import Details from './Details'
+import LogPanel from './LogPanel'
+import ColdStorage from './ColdStorage'
 
 
 class Headquarters extends Component {
@@ -12,15 +14,28 @@ class Headquarters extends Component {
       <Grid celled='internally'>
         <Grid.Column width={8}>
 
-        {/* Something goes here.... */}
+                <ColdStorage
+                hosts={this.props.hosts}
+                selectHost={this.props.selectHost}
+                selectedHost={this.props.selectedHost}
+                />
 
         </Grid.Column>
         <Grid.Column width={5}>
-          <Details />
+
+
+                <Details selectedHost={this.props.selectedHost}
+                areas={this.props.areas}
+                setArea={this.props.setArea}
+                setActive={this.props.setActive}
+                />
+
+
         </Grid.Column>
         <Grid.Column width={3}>
 
-        {/* and here. Take visual cues from the screenshot/video in the Readme. */}
+                  <LogPanel hosts={this.props.hosts} setAllStatus={this.props.setAllStatus}/>
+
 
         </Grid.Column>
       </Grid>
