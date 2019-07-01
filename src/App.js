@@ -13,10 +13,8 @@ class App extends Component {
     hosts: [],
     selectedHost: null,
     loaded: false,
-    render: false
   }
 
-  renderFlip = () => this.setState({render: !this.state.render})
 
 
   componentDidMount() {
@@ -40,50 +38,63 @@ selectHost = (host) => {
 }
 
 setHost = (host) => {
-  const selectedHost = this.state.hosts.find(h => h.id === host.id)
-  this.setState({
-    selectedHost: selectedHost
-  })
+  if (host) {
+    const selectedHost = this.state.hosts.find(h => h.id === host.id)
+    this.setState({
+      selectedHost: selectedHost
+    })
+  }
+  console.log("There is no Selected Host")
 }
+
+
 
 setArea = (area, id) => {
-  this.state.hosts.find(host => host.id === id).area = area
-  this.renderFlip()
+  this.setState({
+    hosts: this.state.hosts.map(host => host.id === id ? {...host, area: area} : host)
+  }, ()=> this.setHost(this.state.selectedHost))
 }
+
 
 setActive = (status, id) => {
-  this.state.hosts.find(host => host.id === id).active = status
-  this.renderFlip()
+  this.setState({
+    hosts: this.state.hosts.map(host => host.id === id ? {...host, active: status} : host)
+  },()=> this.setHost(this.state.selectedHost))
 }
 
-setAllStatus = (status) =>{
-  this.state.hosts.forEach(host=> host.active = status)
-  this.renderFlip()
+setAllStatus = (status) => {
+  this.setState({
+     hosts: this.state.hosts.map(host=> {
+      return  {...host, active: status}
+    })
+  },()=> this.setHost(this.state.selectedHost))
 }
 
-// setArea = (id, area) => this.state.hosts.find(host => host.id === id).area = area), this.renderFlip()
-// setActive = (id, status) => this.state.hosts.find(host => host.id === id).active = status), this.renderFlip()
-// setAllStatus = (status) => this.state.hosts.forEach(host=> host.active = status), this.renderFlip()
+
+// renderFlip = () => this.setState({render: !this.state.render})
+// setArea = (id, area) => (this.state.hosts.find(host => host.id === id).area = area), this.renderFlip())
+// setActive = (id, status) => (this.state.hosts.find(host => host.id === id).active = status), this.renderFlip())
+// setAllStatus = (status) => (this.state.hosts.forEach(host=> host.active = status), this.renderFlip())
 
 
   render(){
     return (
       <Segment id='app'>
         <WestworldMap
-        areas={this.state.areas}
-        hosts={this.state.hosts}
-        selectedHost={this.state.selectedHost}
-        selectHost={this.selectHost}
+          areas={this.state.areas}
+          hosts={this.state.hosts}
+          selectedHost={this.state.selectedHost}
+          selectHost={this.selectHost}
         />
 
         <Headquarters
-        areas={this.state.areas}
-        hosts={this.state.hosts}
-        selectedHost={this.state.selectedHost}
-        selectHost={this.selectHost}
-        setArea={this.setArea}
-        setActive={this.setActive}
-        setAllStatus={this.setAllStatus}
+          areas={this.state.areas}
+          hosts={this.state.hosts}
+          selectedHost={this.state.selectedHost}
+          selectHost={this.selectHost}
+          setArea={this.setArea}
+          setActive={this.setActive}
+          setAllStatus={this.setAllStatus}
 
         />
       </Segment>

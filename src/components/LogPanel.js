@@ -7,32 +7,35 @@ let logs = []
 
 export default class  LogPanel extends React.Component {
 
-  state ={
+  state = {
     allActive: false
   }
 
   triggerLogs = (action, status) => {
     switch(action) {
-      case "allActivate":
+      case "allActivate": {
         logs.unshift(Log.warn("ALL ACTIVIATED"))
         Promise.all(this.props.hosts.map(host=> updateHost("active", status, host.id)))
         .then(()=>this.props.setAllStatus(status))
         this.setState({allActive: !this.state.allActive})
-      break;
-      case "allUnactivate":
+        break;
+      }
+      case "allUnactivate": {
         logs.unshift(Log.warn("ALL DEACTIVATED"))
         Promise.all(this.props.hosts.map(host=> updateHost("active", status, host.id)))
         .then(()=>this.props.setAllStatus(status))
         this.setState({allActive: !this.state.allActive})
       break;
+    }
       case "oneActive":
         logs.unshift(Log.notify("Host going ACTIVE"))
         break;
+
       case "oneUnactive":
         logs.unshift(Log.notify("Host DEACTIVATED"))
         break;
     default:
-      console.log("LOG: something is broken in your ")
+      console.log("LOG: *error* ")
     }
   return logs
   }

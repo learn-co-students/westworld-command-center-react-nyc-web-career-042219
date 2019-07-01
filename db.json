@@ -4,27 +4,27 @@
       "id": 1,
       "firstName": "Ian",
       "lastName": "Hollander",
-      "active": true,
+      "active": false,
       "imageUrl": "https://i.imgur.com/STHXQ3Y.png",
       "gender": "Male",
-      "area": "pariah",
+      "area": "under_construction",
       "authorized": false
     },
     {
       "id": 2,
       "firstName": "Tashawn",
       "lastName": "Williams",
-      "active": true,
+      "active": false,
       "imageUrl": "https://i.imgur.com/Vx6v8ef.png",
       "gender": "Male",
-      "area": "python_pass",
+      "area": "high_plains",
       "authorized": false
     },
     {
       "id": 3,
       "firstName": "Gabbie",
       "lastName": "Piraino",
-      "active": true,
+      "active": false,
       "imageUrl": "https://i.imgur.com/2GOGRJC.png",
       "gender": "Female",
       "area": "high_plains",
@@ -37,7 +37,7 @@
       "active": true,
       "imageUrl": "https://i.imgur.com/h5i7n4n.png",
       "gender": "Male",
-      "area": "python_pass",
+      "area": "lowlands",
       "authorized": false
     },
     {
@@ -47,7 +47,7 @@
       "active": true,
       "imageUrl": "https://i.imgur.com/lOTTZYi.png",
       "gender": "Male",
-      "area": "lowlands",
+      "area": "under_construction",
       "authorized": false
     },
     {
@@ -67,7 +67,7 @@
       "active": true,
       "imageUrl": "https://i.imgur.com/ZwaUO0x.png",
       "gender": "Male",
-      "area": "under_construction",
+      "area": "lowlands",
       "authorized": false
     },
     {
@@ -77,7 +77,7 @@
       "active": true,
       "imageUrl": "https://i.imgur.com/ZUJb2Ey.png",
       "gender": "Female",
-      "area": "lowlands",
+      "area": "high_plains",
       "authorized": false
     },
     {
@@ -134,7 +134,7 @@
       "id": 14,
       "firstName": "Rebus",
       "lastName": "n/a",
-      "active": true,
+      "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/f/fe/203_Rebus.png/revision/latest/scale-to-width-down/310?cb=20180607104216",
       "gender": "Male",
       "area": "lowlands",
@@ -144,7 +144,7 @@
       "id": 15,
       "firstName": "Musashi",
       "lastName": "n/a",
-      "active": true,
+      "active": false,
       "imageUrl": "https://vignette.wikia.nocookie.net/westworld/images/6/6b/Musashi_Akane_No_Mai.jpg/revision/latest/scale-to-width-down/310?cb=20180520131337",
       "gender": "Male",
       "area": "under_construction",

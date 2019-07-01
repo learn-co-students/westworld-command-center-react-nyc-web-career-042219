@@ -18,13 +18,10 @@ export function updateHost(key, value, id, func){
       func(change[key], id)
       :
       null
-    })
+  })
 };
 
 export default class HostInfo extends Component {
-
-
-
   toggle = (e) => {
       let value = !this.props.selectedHost.active
       updateHost("active", value, this.props.selectedHost.id, this.props.setActive)
@@ -35,9 +32,6 @@ export default class HostInfo extends Component {
       updateHost("area", value, this.props.selectedHost.id, this.props.setArea)
   }
 
-
-
-
   areaOptions = () => this.props.areas.map(area => this.createOptionsHash(area))
     formatName = (name) => name.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     createOptionsHash = (area) => {
@@ -47,10 +41,7 @@ export default class HostInfo extends Component {
         value: area.name
       }
     }
-
-
   render(){
-
     return (
       <Grid>
         <Grid.Column width={6}>
@@ -82,7 +73,6 @@ export default class HostInfo extends Component {
                 value={this.props.selectedHost.area}
                 options={this.areaOptions()}
                 selection
-
               />
             </Card.Content>
           </Card>
