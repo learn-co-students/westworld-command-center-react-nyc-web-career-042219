@@ -8,7 +8,7 @@ class Details extends React.Component {
   // Watch the video to see how this works in the app.
   
   renderSomething = () => (<Image size='medium' src={Images.westworldLogo} />)
-  renderHostInfo = () => (<HostInfo areas={this.props.areas} selectedHost={this.props.selectedHost} updateHost={this.props.updateHost} />)
+  renderHostInfo = () => (<HostInfo areas={this.props.areas} hosts={this.props.hosts} selectedHost={this.props.selectedHost} updateHost={this.props.updateHost} />)
 
   render() {
     return(

@@ -3,14 +3,7 @@ import { Card } from 'semantic-ui-react'
 import Host from './Host'
 
 class HostList extends React.Component {
-  renderHosts = () => {
-    return this.props.hosts.map(host => {
-      if (!host.active)
-        return <Host key={host.id} {...host} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} />
-      else
-        return ""
-    })
-  }
+  renderHosts = () => this.props.hosts.map(host => <Host key={host.id} {...host} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} />)
 
   render() {
     return(

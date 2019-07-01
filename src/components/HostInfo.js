@@ -5,7 +5,14 @@ import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-r
 
 class HostInfo extends Component {
   handleChange = (e, {value}) => {
-    this.props.updateHost('area', value)
+    // stop limit here
+    let targetArea = this.props.areas.find(area => area.name === value)
+    let hostsInArea = this.props.hosts.filter(host => host.area === targetArea.name)
+    if (hostsInArea.length > targetArea.limit) {
+      //error log
+    } else {
+      this.props.updateHost('area', value)
+    }
   }
 
   toggle = () => {

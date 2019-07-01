@@ -45,9 +45,9 @@ class App extends Component {
         ...this.state,
         selectedHost: { ...this.state.selectedHost, [key]: value}
       })
-      
+
       //update array... WHY DO I HAVE TO DO THIS
-      //delete item in array................there must be a better way pls
+      //overwrite item in array................there must be a better way pls
       updatedHosts[updatedHosts.indexOf(targetHost)] = this.state.selectedHost
       this.setState({
         ...this.state,

@@ -13,7 +13,7 @@ class Headquarters extends Component {
           <ColdStorage hosts={this.props.hosts} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} />
         </Grid.Column>
         <Grid.Column width={5}>
-          <Details areas={this.props.areas} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} updateHost={this.props.updateHost} />
+          <Details areas={this.props.areas} hosts={this.props.hosts} selectedHost={this.props.selectedHost} handleSelect={this.props.handleSelect} updateHost={this.props.updateHost} />
         </Grid.Column>
         <Grid.Column width={3}>
           <LogPanel />
