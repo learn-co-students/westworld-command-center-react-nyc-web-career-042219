@@ -2,26 +2,50 @@ import React, { Component } from 'react';
 import '../stylesheets/Headquarters.css';
 import { Grid } from 'semantic-ui-react';
 import Details from './Details'
-
+import ColdStorage from './ColdStorage'
+import LogPanel from './LogPanel'
 
 class Headquarters extends Component {
-  // Remember, there's many ways to do this. This doesn't have to be a class component. It's up to you.
+  state = {
+    activated: false
+  }
 
-  render(){
+  switchActivation = () => {
+    this.setState({
+      activated: !this.state.activated
+    })
+  }
+
+  render() {
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
-
-        {/* Something goes here.... */}
-
+          <ColdStorage 
+            hosts={this.props.hosts} 
+            selectedHost={this.props.selectedHost} 
+            handleSelect={this.props.handleSelect} 
+          />
         </Grid.Column>
         <Grid.Column width={5}>
-          <Details />
+          <Details 
+            areas={this.props.areas} 
+            hosts={this.props.hosts} 
+            selectedHost={this.props.selectedHost} 
+            handleSelect={this.props.handleSelect} 
+            updateHost={this.props.updateHost} 
+            logs={this.props.logs} 
+            updateLogs={this.props.updateLogs}
+          />
         </Grid.Column>
         <Grid.Column width={3}>
-
-        {/* and here. Take visual cues from the screenshot/video in the Readme. */}
-
+          <LogPanel 
+            hosts={this.props.hosts} 
+            updateHost={this.props.updateHost} 
+            activated={this.state.activated} 
+            switchActivation={this.switchActivation} 
+            logs={this.props.logs} 
+            updateLogs={this.props.updateLogs}
+          />
         </Grid.Column>
       </Grid>
     )
